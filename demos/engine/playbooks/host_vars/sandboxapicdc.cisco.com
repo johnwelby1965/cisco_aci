@@ -4,4 +4,4 @@
 #
   fvTenant: 
     name: INTERNAL
-    description: '@joelwking'
+    descr: '@joelwking'

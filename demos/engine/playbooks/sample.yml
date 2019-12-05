@@ -23,19 +23,17 @@
   vars:
     # We prepare an aci_login anchor for convenience
     aci_login: &aci_login
-      hostname: '{{ apic_host }}'
+      hostname: '{{ apic_hostname }}'
       username: '{{ apic_username }}'
       password: '{{ apic_password }}'
       use_proxy: '{{ apic_use_proxy }}'
       validate_certs: '{{ apic_validate_certs }}'
-      timeout: '{{ apic_timeout }}'
-      use_ssl: '{{ apic_use_ssl }}'
 
     desired_state: present
 
-  tasks:      
+  tasks:
     - name: Tenant (fvTenant)
-      cisco.aci_tenant:
+      cisco.aci.aci_tenant:
         <<: *aci_login
         #
         state: '{{ desired_state }}'
