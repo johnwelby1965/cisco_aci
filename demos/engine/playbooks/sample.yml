@@ -12,27 +12,33 @@
 #
 #      usage:
 #
-#        ./UPDATEME.yml -v
+#        ./UPDATEME.yml -v   -e 'apic_password=foo!bar'
 #
 #
 - name: Demo for the Cisco Data Center Community of Interest
-  hosts:  localhost
+  hosts:  sandboxapicdc.cisco.com
   connection: local
   gather_facts: no
 
   vars:
+    # We prepare an aci_login anchor for convenience
+    aci_login: &aci_login
+      hostname: '{{ apic_host }}'
+      username: '{{ apic_username }}'
+      password: '{{ apic_password }}'
+      use_proxy: '{{ apic_use_proxy }}'
+      validate_certs: '{{ apic_validate_certs }}'
+      timeout: '{{ apic_timeout }}'
+      use_ssl: '{{ apic_use_ssl }}'
 
-    provider:
-      hostname: 'rocket.sandbox.wwtatc.local'
-      database: ACI
-      collection: dccoi
-    queries:
-       - _id: 5d07e307e349b507d8d41d57
-
-
-    acl_action: {"ALLOW": "permit", "DROP": "deny"}        # translator for action verbs
+    desired_state: present
 
   tasks:      
-    - name: debug
-      debug:
-        msg: '{{ acl_action }}'
+    - name: Tenant (fvTenant)
+      cisco.aci_tenant:
+        <<: *aci_login
+        #
+        state: '{{ desired_state }}'
+        #
+        tenant: '{{ fvTenant.name }}'
+        description: '{{ fvTenant.descr }}'

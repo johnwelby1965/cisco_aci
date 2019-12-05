@@ -1,0 +1,30 @@
+---
+all:
+  children:
+
+    APIC:
+      hosts:
+        #
+        #  This APIC is within the WWT Advanced Technology Center
+        #
+        aci-demo.sandbox.wwtatc.local:
+          apic_ip: aci-demo.sandbox.wwtatc.local
+          apic_username: admin
+          apic_use_proxy: no
+          apic_validate_certs: no
+          apic_password: foo!bar
+        #
+        # This APIC is in the DevNet Sandbox 
+        #
+        sandboxapicdc.cisco.com:
+          apic_ip: sandboxapicdc.cisco.com
+          apic_username: admin
+          apic_use_proxy: no
+          apic_validate_certs: no
+          apic_password: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            30343631663936653264373936626666373738613466346162343430656264373332376566306665
+            6331636534653332643031306239306637306638326438640a646531643562656634383839366535
+            38353738343334353062303864636236616433363965313130313062346163343036646334666563
+            3633366561353762630a343630343633636633653764386263363861333932353263633439313263
+            3735
