@@ -2,16 +2,16 @@
 #
 #  Tenant Policies
 #
-  fvTenant:
-    - name: INTERNAL
-      descr: '@joelwking'
-      state: present
+    fvTenant:
+      - name: INTERNAL
+        descr: '@joelwking'
+        state: present
 
-    - name: EXTERNAL
-      descr: '@joelwking'
-      state: present
+      - name: EXTERNAL
+        descr: '@joelwking'
+        state: present
 
-  fvCtx:
+    fvCtx:
       - name: GREEN
         descr: vrf GREEN @joelwking
         pcEnfPref: enforced                                    # policy control preference
@@ -39,7 +39,8 @@
 # Fabric Access Policies
 #
     lldpIfP:
-      - adminRxSt: enabled
-        adminTxSt: enabled
+      - adminRxSt: on
+        adminTxSt: on
         descr: 'LLDP Interface Policy @joelwking'
-        name: ' Link_Layer_Discovery_Protocol'
+        name: Link_Layer_Discovery_Protocol_ON
+        state: present

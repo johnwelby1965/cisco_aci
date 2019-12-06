@@ -12,7 +12,7 @@
 #
 #      usage:
 #
-#        ./sample.yml -v   -e 'apic_hostname=sandboxapicdc.cisco.com apic_password=foo!bar'
+#        ./sample.yml -v -i inventory.yml --ask-vault -e 'apic_hostname=sandboxapicdc.cisco.com apic_password=foo!bar'
 #
 #
 - name: Demo for the Cisco Data Center Community of Interest
@@ -21,7 +21,7 @@
   gather_facts: no
 
   vars_files:
-    - '{{ playbook_dir }}'/files/passwords.yml
+    - '{{ playbook_dir }}/files/passwords.yml'
 
   vars:
     # We prepare an aci_login anchor for convenience
@@ -33,8 +33,8 @@
       validate_certs: '{{ apic_validate_certs }}'
 
   tasks:
-    - block:
-      name: Tenant Policy
+    - name: Tenant Policy
+      block:
 
         - name: Tenant (fvTenant)
           cisco.aci.aci_tenant:
@@ -63,8 +63,8 @@
         #  ... and so on ...
         #
 
-    - block:
-      name: Fabric Policy
+    - name: Fabric Policy
+      block:
 
         - name: LLDP Policy (lldpIfP)
           cisco.aci.aci_interface_policy_lldp:
@@ -72,10 +72,10 @@
             #
             state: '{{ item.state }}'
             #
-            lldp_policy: '{{ lldpIfP.name }}'
-            description: '{{ lldpIfP.descr }}'
-            receive_state: '{{ lldpIfP.adminRxSt }}' 
-            transmit_state: '{{ lldpIfP.adminTxSt }}'
+            lldp_policy: '{{ item.name }}'
+            description: '{{ item..descr }}'
+            receive_state: '{{ item..adminRxSt }}' 
+            transmit_state: '{{ item.adminTxSt }}'
           loop: '{{ lldpIfP }}'
 
         #
