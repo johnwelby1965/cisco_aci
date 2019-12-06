@@ -26,7 +26,7 @@ $ ansible-galaxy install datacenter.aci-model
 
 
 $ cd cisco_dc_community_of_interest/demos/engine/playbooks
-$ ansible-playbook sample.yml
+$ ansible-playbook sample.yml -i inventory.yml
 
 
 # point to the ansible.cfg file provided in this demo

@@ -12,13 +12,16 @@
 #
 #      usage:
 #
-#        ./UPDATEME.yml -v   -e 'apic_password=foo!bar'
+#        ./sample.yml -v   -e 'apic_hostname=sandboxapicdc.cisco.com apic_password=foo!bar'
 #
 #
 - name: Demo for the Cisco Data Center Community of Interest
-  hosts:  sandboxapicdc.cisco.com
+  hosts:  '{{ apic_hostname }}'
   connection: local
   gather_facts: no
+
+  vars_files:
+    - '{{ playbook_dir }}'/files/passwords.yml
 
   vars:
     # We prepare an aci_login anchor for convenience
@@ -29,14 +32,52 @@
       use_proxy: '{{ apic_use_proxy }}'
       validate_certs: '{{ apic_validate_certs }}'
 
-    desired_state: present
-
   tasks:
-    - name: Tenant (fvTenant)
-      cisco.aci.aci_tenant:
-        <<: *aci_login
+    - block:
+      name: Tenant Policy
+
+        - name: Tenant (fvTenant)
+          cisco.aci.aci_tenant:
+            <<: *aci_login
+            #
+            state: '{{ item.state }}'
+            #
+            tenant: '{{ item.name }}'
+            description: '{{ item.descr }}'
+          loop: '{{ fvTenant }}'
+
+        - name: VRF (fvCtx) private network context associated to a tenant 
+          cisco.aci.aci_vrf:
+            <<: *aci_login
+            #
+            state: '{{ item.state }}'
+            #
+            tenant: '{{ item.fvTenant.name}}'
+            vrf: '{{ item.name }}'
+            descr: '{{ item.descr }}'
+            policy_control_preference: '{{ item.pcEnfPref }}'
+            policy_control_direction: '{{ item.pcEnfDir }}'
+          loop: '{{ fvCtx }}'
+
         #
-        state: '{{ desired_state }}'
+        #  ... and so on ...
         #
-        tenant: '{{ fvTenant.name }}'
-        description: '{{ fvTenant.descr }}'
+
+    - block:
+      name: Fabric Policy
+
+        - name: LLDP Policy (lldpIfP)
+          cisco.aci.aci_interface_policy_lldp:
+            <<: *aci_login
+            #
+            state: '{{ item.state }}'
+            #
+            lldp_policy: '{{ lldpIfP.name }}'
+            description: '{{ lldpIfP.descr }}'
+            receive_state: '{{ lldpIfP.adminRxSt }}' 
+            transmit_state: '{{ lldpIfP.adminTxSt }}'
+          loop: '{{ lldpIfP }}'
+
+        #
+        #  ... and so on ...
+        #
