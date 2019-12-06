@@ -73,8 +73,8 @@
             state: '{{ item.state }}'
             #
             lldp_policy: '{{ item.name }}'
-            description: '{{ item..descr }}'
-            receive_state: '{{ item..adminRxSt }}' 
+            description: '{{ item.descr }}'
+            receive_state: '{{ item.adminRxSt }}' 
             transmit_state: '{{ item.adminTxSt }}'
           loop: '{{ lldpIfP }}'
 

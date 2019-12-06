@@ -26,7 +26,8 @@ $ ansible-galaxy install datacenter.aci-model
 
 
 $ cd cisco_dc_community_of_interest/demos/engine/playbooks
-$ ansible-playbook sample.yml -i inventory.yml
+
+ansible-playbook ./sample.yml -v -i inventory.yml --ask-vault -e 'apic_hostname=sandboxapicdc.cisco.com'
 
 
 # point to the ansible.cfg file provided in this demo
