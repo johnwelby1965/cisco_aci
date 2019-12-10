@@ -4,10 +4,11 @@ Instructions
 Steps to execute the Ansible engine demo.
 
 ## Create VM
+You will need the Vagrantfile from `vagrant/Vagrantfile` on your laptop. Your laptop also needs Oracle VM Virtual Box and HashiCorp Vagrant. If you also have Git installed on your laptop, you can download the Vagrantfile using `git clone https://gitlab.com/joelwking/cisco_dc_community_of_interest.git` to download this repository.  
 
-You will need the Vagrantfile from `vagrant/Vagrantfile` on your laptop. Your laptop also needs Oracle VM Virtual Box and HashiCorp Vagrant. If you also have Git installed on your laptop, you can download the Vagrantfile using `git clone https://gitlab.com/joelwking/cisco_dc_community_of_interest.git` to download this repository.  Or you can copy and paste `https://gitlab.com/joelwking/cisco_dc_community_of_interest/raw/master/demos/engine/vagrant/Vagrantfile` to a directory as filename `Vagrantfile`.
+You can copy and paste `https://gitlab.com/joelwking/cisco_dc_community_of_interest/raw/master/demos/engine/vagrant/Vagrantfile` to a directory as filename `Vagrantfile`.
 
-From that directory issue `vagrant up` to instanciate the VM. 
+From that directory issue `vagrant up` to instantiate the VM. 
 
 It will take a few minutes to build the environment, when complete, connect to the VM using `vagrant ssh`.
 
@@ -19,7 +20,6 @@ $ git clone https://gitlab.com/joelwking/cisco_dc_community_of_interest.git
 ```
 
 ### Install Content Collections
-
 Use Ansible Galaxy to download and install the Cisco ACI content connection. 
 
 ```bash
@@ -58,12 +58,13 @@ In the video demonstration, we have encrypted the `passwords.yml` file to avoid 
 
 Rename or remove the existing `files/passwords.yml` and create a local copy in the form of:
 
-> ---
-> #
-> #  Substitute 'cisco123,' with the password for the DevNet Sandbox APIC
-> #
->  apic_password: cisco123,
-
+```yaml
+---
+#
+#  Substitute 'cisco123,' with the password for the DevNet Sandbox APIC
+#
+  apic_password: cisco123,
+```
 Execute the sample playbook. 
 
 ```bash
@@ -80,9 +81,9 @@ Log on [sandboxapicdc.cisco.com](https://sandboxapicdc.cisco.com) using the cred
 
 The configuration variables are stored in these three files:
 
-> `inventory.yml`
-> `host_vars/sandboxapicdc.cisco.com`
-> `files/passwords.yml`
+* `inventory.yml`
+* `host_vars/sandboxapicdc.cisco.com`
+* `files/passwords.yml`
 
 You can review, append, modify these files.
 
