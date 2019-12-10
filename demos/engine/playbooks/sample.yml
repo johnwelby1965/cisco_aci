@@ -8,7 +8,7 @@
 #
 #      description: 
 #
-#        This playbook ....
+#        This playbook manages Tenants, VRFs and fabric policies to demonstrate the Ansible ACI contenct collection.
 #
 #      usage:
 #
