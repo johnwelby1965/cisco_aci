@@ -26,7 +26,7 @@ Use Ansible Galaxy to download and install the Cisco ACI content connection.
 $ ansible-galaxy collection install cisco.aci
 
 ```
-By default the collection is installed in `/home/vagrant/.ansible/collections/ansible_collections/`. While not needed for this demo, you can download and install additional collections. For example, to download and install a WWT developed collection and role, issue the command 
+By default the collection is installed in `/home/vagrant/.ansible/collections/ansible_collections/`. While not needed for this demo, you can download and install additional collections. For example, to download and install a WWT developed collection and role, issue the command:
 ```
 $ ansible-galaxy collection install joelwking.mongodb
 ```
