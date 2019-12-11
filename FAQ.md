@@ -35,4 +35,4 @@ A: Yes, you can associate one or more 'tags' with a task and specify the tags yo
 
 Q: *Where can I go for more information or questions on using Ansible with Cisco ACI?*
 
-A: Use the [issue tracker](https://gitlab.com/joelwking/cisco_dc_community_of_interest/issues/new) and open a new issue.
+A: There several lists of resources in the main `README.md` file. Use the [issue tracker](https://gitlab.com/joelwking/cisco_dc_community_of_interest/issues/new) and open a new issue if you have questions or comments not covered in those links. There is a slide with a list of key contacts shared during the presentation.
