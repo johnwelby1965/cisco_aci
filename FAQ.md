@@ -13,6 +13,14 @@ Q: *What are some of the reasons for implementing Content Collections?*
 
 A: Ansible has increased in popularity to the point where the shear number of contributors exceeded the ability to incorporate their code into the official Ansible distribution in a timely manner. Collections provide a means where the OEMs, or individual contributors, could develop and publish moduless and roles independently from the core Ansible distribution. It greatly enhances the extensibility of the Ansible framework.
 
-Q:
+Q: *Are there any best practices for authenticating with the APIC?*
 
-A:
+A: While you can authenticate using a username and password, the best solution is to use signature-based authentication. It is more efficient than than password-based authentication and minimizes the likelihood of triggering the anti-DOS logic.
+
+Q: *In a three APIC cluster, does it matter which APIC the playbook uses?*
+
+A: No, use any available APIC, with either the in-band or out-of-band management IP address. You can code the playbook to randomly select one of the cluster management IP addresses.
+
+Q: *Can the same playbook be used to create or delete managed objects on the APIC?*
+
+A: Yes, the ACI modules include a variable called 'state', which can be set to 'present' or 'absent', which will create or delete the target object. The sample playbooks in this repository illustrate that use case.
