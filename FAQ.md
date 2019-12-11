@@ -3,7 +3,7 @@ Frequently Asked Questions
 
 These are frequently asked questions based on customer engagements and the collateral provided in the webinar.
 
-## Questions
+## Questions and Answers
 
 Q: *Could you define what 'control node' represents in the context of Ansible?*
 
@@ -24,3 +24,15 @@ A: No, use any available APIC, with either the in-band or out-of-band management
 Q: *Can the same playbook be used to create or delete managed objects on the APIC?*
 
 A: Yes, the ACI modules include a variable called 'state', which can be set to 'present' or 'absent', which will create or delete the target object. The sample playbooks in this repository illustrate that use case.
+
+Q: *Does the playbook run on the APIC?*
+
+A: No, the playbook runs on the control node and communicates with the APIC via the REST API. The local connection runs commands locally, instead of running over SSH. In the sample playbook we specify 'connection: local'.
+
+Q: *If my playbook has multiple tasks, for example, tasks to manage tenants, VRFs, Bridge Domains, Application Profiles, etc., can I selectively execute the task to delete an Application Profile?*
+
+A: Yes, you can associate one or more 'tags' with a task and specify the tags you wish to execute using the '--tags' option. Alternately, if the tasks in the playbook loop over a list variable, you could control the execution by providing an empty list for the list variable. There are a number of ways to control the execution of a playbook without modifying the playbook itself.
+
+Q: *Where can I go for more information or questions on using Ansible with Cisco ACI?*
+
+A: Use the [issue tracker](https://gitlab.com/joelwking/cisco_dc_community_of_interest/issues/new) and open a new issue.
