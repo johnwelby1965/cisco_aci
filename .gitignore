@@ -1,2 +1,4 @@
 demos/engine/vagrant/.vagrant
 demos/engine/vagrant/*.log
+demos/tower/vagrant/.vagrant
+demos/tower/vagrant/*.log

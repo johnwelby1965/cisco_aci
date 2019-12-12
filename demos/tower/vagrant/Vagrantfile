@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+#
+#      Copyright (c) 2019 World Wide Technology, Inc.
+#      All rights reserved.
+#
+#      author: @joelwking
+#
+#      description: 
+#        Sample Vagrant file for running the tower cli 
+#        https://docs.ansible.com/ansible-tower/latest/html/towercli/usage.html
+#
+#      usage:
+#        vagrant up
+#
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "sys/centos-8"
+  config.vm.box_version = "2019.12.04.1575487712"
+  config.vm.hostname = "flint"
+  
+  config.vm.provision  "shell", inline: <<-SHELL
+  dnf config-manager --add-repo https://releases.ansible.com/ansible-tower/cli/ansible-tower-cli-el8.repo
+  dnf install ansible-tower-cli -y --nogpgcheck 
+  SHELL
+end
