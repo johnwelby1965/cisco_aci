@@ -2,36 +2,6 @@
 
 Collateral for the Cisco Data Center (DC) Community of Interest webinar - 13 December 2019
 
-## Directory Structure
-The `demos` directory is divided into two sections, `engine` and `tower`.  For the webinar on the 13th December, we will focus on the `engine` section. The goal of the demo is that every participant will have a basic understanding on how to execute the sample playbook from their laptop to configure the ACI demo fabric in the DevNet Sandbox.
-
-```bash
-.
-├── CODE_OF_CONDUCT.md
-├── CONTRIBUTING.md
-├── demos
-│   ├── engine
-│   │   ├── playbooks
-│   │   │   ├── ansible.cfg
-│   │   │   ├── files
-│   │   │   │   └── passwords.yml
-│   │   │   ├── host_vars
-│   │   │   │   └── sandboxapicdc.cisco.com
-│   │   │   ├── inventory.yml
-│   │   │   └── sample.yml
-│   │   ├── README.md
-│   │   └── vagrant
-│   │       └── Vagrantfile
-│   └── tower
-│       ├── playbooks
-│       │   └── sample.yml
-│       └── README.md
-├── FAQ.md
-├── LICENSE
-├── NOTICE
-└── README.md
-```
-
 ## General Resources
 * WWT Digital Platform: https://www.wwt.com
 * GitLab repository of demonstration: https://gitlab.com/joelwking/cisco_dc_community_of_interest
@@ -62,6 +32,40 @@ The `demos` directory is divided into two sections, `engine` and `tower`.  For t
 ## Ansible ACI modules
 * List of Network Modules: https://docs.ansible.com/ansible/latest/modules/list_of_network_modules.html#aci
 * ACI Guide: https://docs.ansible.com/ansible/latest/scenario_guides/guide_aci.html
+
+## Directory Structure
+The `demos` directory is divided into two sections, `engine` and `tower`.  For the webinar on the 13th December, we will focus on the `engine` section. The goal of the demo is that every participant will have a basic understanding on how to execute the sample playbook from their laptop to configure the ACI demo fabric in the DevNet Sandbox.
+
+```bash
+
+.
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── demos
+│   ├── engine
+│   │   ├── playbooks
+│   │   │   ├── ansible.cfg
+│   │   │   ├── files
+│   │   │   │   └── passwords.yml
+│   │   │   ├── host_vars
+│   │   │   │   └── sandboxapicdc.cisco.com
+│   │   │   ├── inventory.yml
+│   │   │   └── sample.yml
+│   │   ├── README.md
+│   │   └── vagrant
+│   │       └── Vagrantfile
+│   └── tower
+│       ├── playbooks
+│       │   └── sample.yml
+│       ├── README.md
+│       └── vagrant
+│           └── Vagrantfile
+├── FAQ.md
+├── LICENSE
+├── NOTICE
+└── README.md
+```
+The `tower` section includes a sample Vagrantfile which builds a VM and installs **awx** - the official command-line client for AWX and Red Hat Ansible Tower. Following the webinar on the 13th December, I will update the `README.md` file to include instructions on how to use **awx** to configure an Ansible Tower instance running in the WWT Advanced Technology Center on-demand lab environment, so you can execute the same playbook used in the demo video using Ansible Tower. Stay tuned. 
 
 ## Author
 joel.king@wwt.com GitHub/GitLab: @joelwking
