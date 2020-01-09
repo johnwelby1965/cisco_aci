@@ -13,6 +13,7 @@ Collateral for the Cisco Data Center (DC) Community of Interest webinar - 13 Dec
 
 ## Demo Resources
 * Instructions: https://gitlab.com/joelwking/cisco_dc_community_of_interest/blob/master/demos/engine/README.md
+* Demo video on Vimeo (without audio ): https://vimeo.com/383756669
 * WWT RedHat Ansible Cisco ACI sandbox: https://www.wwt.com/lab/aci-ansible-sandbox
 * DevNet: https://developer.cisco.com
 * DevNet ACI Sandbox: https://developer.cisco.com/site/aci/
