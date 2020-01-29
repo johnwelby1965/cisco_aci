@@ -31,16 +31,16 @@
     - joelwking.mongodb
 
   vars:
-    bootstrap: sample123
 
-    apic:
-      username: admin
-      password: '{{ apic_password }}'
+    apic:                                # ansible-aci-credentials needs a username and password
+      username: admin                    # typically you would define these variables in passwords.yml
+      password: '{{ apic_password }}'    # and ansible-vault the file
+
+    bootstrap: sample123.yml             # ansible-aci-include-data needs a bootstrap filename
 
   roles:
     - ansible-aci-credentials
     - ansible-aci-include-data    
-
 
   tasks:
     - name: Tenant Policy debugs
@@ -60,7 +60,7 @@
         desired_state: '{{ item.state }}'
         fvTenant:
           name: '{{ item.tenant }}'
-          descr: '{{ item.description }} | {{ bootstrap }}'
+          descr: '{{ item.description }} | configured using bootstrap file: {{ bootstrap }}'
       loop: '{{ FVTENANT }}'
 
     - name: Manage VRFs for the specified Tenant
@@ -77,8 +77,11 @@
           pcEnfDir: '{{ item.pcEnfDir }}'
       loop: '{{ spreadsheet }}'
 
-
-
         #
         #  ... and so on ...
         #
+
+    - name: Delete certificate and key file
+      include_role:
+        name: ansible-aci-credentials
+        tasks_from: delete

@@ -47,4 +47,4 @@ wget https://raw.githubusercontent.com/joelwking/mongodb/master/plugins/modules/
 
 ```bash
 cd $HOME/ansible/cisco_dc_community_of_interest/demos/engine/playbooks/
-ansible-playbook ansible-playbook ./sample_wwt_roles.yml -v -i inventory.yml --e 'bootstrap=sample123 apic_hostname=sandboxapicdc.cisco.com apic_password=foobar'
+ansible-playbook ./sample_wwt_roles.yml -v -i inventory.yml --e 'bootstrap=sample123 apic_hostname=sandboxapicdc.cisco.com apic_password=foobar'
