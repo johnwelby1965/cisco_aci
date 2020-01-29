@@ -1,0 +1,4 @@
+tenant,description,state,vrf,vrf_state,pcEnfPref,pcEnfDir,comments
+INTERNAL,"@joelwking",present,GREEN,present,enforced,egress,"World Wide Technology"
+EXTERNAL,"@joelwking",present,RED,present,enforced,egress,"The quick brown fox jumped over the lazy dog"
+EXTERNAL,"@joelwking",present,BLACK,absent,enforced,egress,"please delete me"

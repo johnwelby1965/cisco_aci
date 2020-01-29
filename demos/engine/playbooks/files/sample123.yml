@@ -1,0 +1,29 @@
+---
+#
+#  bootstrap file: sample123.yml
+#
+# 
+#  Sample bootstrap file for including variables from YAML, CSV or MongoDB
+#
+#  sample123.yml
+#
+#  NOTE: the default value of an empty list is set in defaults/main.yml
+#        the defailt directory location is set in defaults/main.yml
+#
+#
+# Include files with .yml extensions
+#
+data_model_files:
+  - passwords
+#
+# Include files with .csv extenstions
+#
+csv_model_files:
+  - csv_provider:
+      name: sample_csv_file
+      register: spreadsheet
+      vsheets:
+        - FVTENANT:
+          - tenant
+          - description
+          - state

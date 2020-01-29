@@ -1,0 +1,72 @@
+#!/usr/bin/ansible-playbook
+---
+#
+#      Copyright (c) 2020 World Wide Technology, LLC.
+#      All rights reserved.
+#
+#      author: joel.king@wwt.com GitHub/GitLab @joelwking
+#
+#      description: 
+#
+#        This playbook manages Tenants, VRFs and fabric policies to demonstrate the Ansible ACI contenct collection and WWT developed roles.
+#
+#      usage:
+#
+#        ./sample.yml -v -i inventory.yml --e 'bootstrap=sample123 apic_hostname=sandboxapicdc.cisco.com apic_password=foo!bar'
+#
+#        sample123.yml must be in the '{{ playbook_dir }}/files/' directory
+#
+#      Requirements:
+#        If not installed, download csv_to_facts.py and mongodb_iq.py to ./library/
+#        wget https://raw.githubusercontent.com/joelwking/ansible-nxapi/master/csv_to_facts.py 
+#
+#
+- name: Demo using roles rather than calling modules directly from a playbook
+  hosts:  '{{ apic_hostname }}'
+  connection: local
+  gather_facts: no
+
+  collections:
+    - cisco.aci
+
+  vars:
+    bootstrap: sample123
+
+    apic:
+      username: admin
+      password: '{{ apic_password }}'
+
+  roles:
+    - ansible-aci-credentials
+    - ansible-aci-include-data    
+
+
+  tasks:
+    - name: Tenant Policy
+      block:
+        - debug:
+            msg: '{{ spreadsheet }}'
+
+
+        #
+        #  ... and so on ...
+        #
+
+    - name: Fabric Policy
+      block:
+
+        - name: LLDP Policy (lldpIfP)
+          cisco.aci.aci_interface_policy_lldp:
+            <<: *aci_login
+            #
+            state: '{{ item.state }}'
+            #
+            lldp_policy: '{{ item.name }}'
+            description: '{{ item.descr }}'
+            receive_state: '{{ item.adminRxSt }}' 
+            transmit_state: '{{ item.adminTxSt }}'
+          loop: '{{ lldpIfP }}'
+
+        #
+        #  ... and so on ...
+        #

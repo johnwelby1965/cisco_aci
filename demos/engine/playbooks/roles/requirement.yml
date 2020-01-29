@@ -1,0 +1,94 @@
+---
+# You can specify multiple repos, just add items to the list
+# See http://docs.ansible.com/ansible/latest/galaxy.html#installing-multiple-roles-from-a-file
+# Will define customer package post deployment on external private WWT github
+#
+# Utility roles
+#
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-credentials.git
+    scm: git
+    version: master
+
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-include-data.git
+    scm: git
+    version: master
+
+  - src: https://github.wwt.com/it-automation-aci/ansible-git-update.git
+    scm: git
+    version: master
+#
+# ACI roles
+#
+  # Tenant Policy Roles 
+    
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-tenant.git
+    scm: git
+    version: master
+    
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-bridgedomain.git
+    scm: git
+    version: master
+
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-vrf.git
+    scm: git
+    version: master
+
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-application-profile.git
+    scm: git
+    version: master
+
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-epg.git
+    scm: git
+    version: master
+
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-l3out.git
+    scm: git
+    version: master
+    
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-static-binding.git
+    scm: git
+    version: master    
+
+  - src: https://github.wwt.com/hattont/ansible-aci-snapshot.git
+    scm: git
+    version: master
+
+  # Tenant Security Policy Roles
+  
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-contract-filter.git
+    scm: git
+    version: master
+   
+  # Fabric Access Policies
+
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-interface-policies
+    scm: git
+    version: master
+    
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-aep
+    scm: git
+    version: master    
+
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-domain
+    scm: git
+    version: master    
+  
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-vlan-pool
+    scm: git
+    version: master
+    
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-switch-profiles
+    scm: git
+    version: master
+
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-port-profiles
+    scm: git
+    version: master
+
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-vpc-domain
+    scm: git
+    version: master
+  
+  - src: https://github.wwt.com/it-automation-aci/ansible-aci-vmware-vmm
+    scm: git
+    version: master
