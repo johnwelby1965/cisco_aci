@@ -15,6 +15,7 @@
 #
 data_model_files:
   - passwords
+  - defaults
 #
 # Include files with .csv extenstions
 #

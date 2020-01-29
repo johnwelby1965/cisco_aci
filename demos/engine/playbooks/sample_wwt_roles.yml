@@ -28,6 +28,7 @@
 
   collections:
     - cisco.aci
+    - joelwking.mongodb
 
   vars:
     bootstrap: sample123
@@ -42,30 +43,41 @@
 
 
   tasks:
-    - name: Tenant Policy
+    - name: Tenant Policy debugs
       block:
         - debug:
-            msg: '{{ spreadsheet }}'
+            msg: '{{ item }}'
+          loop: '{{ spreadsheet }}'
+
+        - debug:
+            msg: '{{ item.tenant }} {{ item.description }} {{ item.state }}'
+          loop: '{{ FVTENANT }}'
+
+    - name: Manage Tenants
+      include_role:
+        name: ansible-aci-tenant
+      vars:
+        desired_state: '{{ item.state }}'
+        fvTenant:
+          name: '{{ item.tenant }}'
+          descr: '{{ item.description }} | {{ bootstrap }}'
+      loop: '{{ FVTENANT }}'
+
+    - name: Manage VRFs for the specified Tenant
+      include_role:
+        name: ansible-aci-vrf
+      vars:
+        desired_state: '{{ item.vrf_state }}'
+        fvTenant:
+          name: '{{ item.tenant }}'
+        fvCtx:
+          name: '{{ item.vrf }}'
+          descr: '{{ item.description }} {{ item.comments }}'
+          pcEnfPref: '{{ item.pcEnfPref }}'
+          pcEnfDir: '{{ item.pcEnfDir }}'
+      loop: '{{ spreadsheet }}'
 
 
-        #
-        #  ... and so on ...
-        #
-
-    - name: Fabric Policy
-      block:
-
-        - name: LLDP Policy (lldpIfP)
-          cisco.aci.aci_interface_policy_lldp:
-            <<: *aci_login
-            #
-            state: '{{ item.state }}'
-            #
-            lldp_policy: '{{ item.name }}'
-            description: '{{ item.descr }}'
-            receive_state: '{{ item.adminRxSt }}' 
-            transmit_state: '{{ item.adminTxSt }}'
-          loop: '{{ lldpIfP }}'
 
         #
         #  ... and so on ...

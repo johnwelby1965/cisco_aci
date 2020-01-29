@@ -1,0 +1,7 @@
+---
+#
+# Global variables                                         # Rather than clutter the playbook, define global varialbes here
+#
+validate_certs: no                                         # If `no', SSL certificates will not be validated.
+use_ssl: yes                                               # When 'yes', use HTTPS, otherwise use HTTP.
+timeout: 30   
