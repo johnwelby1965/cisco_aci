@@ -44,23 +44,7 @@ The `demos` directory is divided into two sections, `engine` and `tower`.  For t
 ├── CONTRIBUTING.md
 ├── demos
 │   ├── engine
-│   │   ├── playbooks
-│   │   │   ├── ansible.cfg
-│   │   │   ├── files
-│   │   │   │   └── passwords.yml
-│   │   │   ├── host_vars
-│   │   │   │   └── sandboxapicdc.cisco.com
-│   │   │   ├── inventory.yml
-│   │   │   └── sample.yml
-│   │   ├── README.md
-│   │   └── vagrant
-│   │       └── Vagrantfile
 │   └── tower
-│       ├── playbooks
-│       │   └── sample.yml
-│       ├── README.md
-│       └── vagrant
-│           └── Vagrantfile
 ├── FAQ.md
 ├── LICENSE
 ├── NOTICE
