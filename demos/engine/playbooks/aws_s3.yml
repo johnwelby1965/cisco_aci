@@ -1,0 +1,51 @@
+#!/usr/bin/ansible-playbook
+---
+#
+#      Copyright (c) 2020 World Wide Technology, LLC.
+#      All rights reserved.
+#
+#      author: joel.king@wwt.com GitHub/GitLab @joelwking
+#
+#      description: 
+#
+#        This playbook loads file(s) to AWS S3 buckets
+#
+#      usage:
+#
+#        ./aws_s3.yml -v -i inventory.yml -e 'bucket="olive-iron" keys=/home/administrator/amazon_web_service/access_keys/s3.yml'
+#
+#      the AWS access and secret key are stored in a YAML file.
+#
+- name: Data Manipulation | Meetup | Ansible Durham | S3 
+  hosts: s3.amazonaws.com
+  connection: local
+  gather_facts: '{{ facts | default("no") }}' 
+
+  module_defaults:
+    aws_s3:
+      aws_access_key: '{{ access.key }}'
+      aws_secret_key: '{{ secret.key }}'
+      bucket: '{{ bucket }}'
+
+  vars:
+    keys: '/home/administrator/amazon_web_service/access_keys/s3.yml'
+    input:
+      - name: '/usr/bin/ansible'
+        state: put 
+        meta_data: 'foo=bar'
+      - name: '{{ playbook_dir }}/files/sample_csv_file.csv'
+        state: put 
+        meta_data: 'foo=bar'
+    
+  vars_files:
+    - '{{ keys }}'
+
+  tasks:
+    - name: PUT/upload with metadata
+      aws_s3:
+        object: '{{ item.name }}' 
+        src: '{{ item.name }}' 
+        mode: '{{ item.state }}'
+        metadata: '{{ item.meta_data }}' 
+      loop: '{{ input }}'
+

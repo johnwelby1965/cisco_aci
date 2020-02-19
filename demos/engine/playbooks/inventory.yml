@@ -22,3 +22,7 @@ all:
           apic_use_proxy: no
           apic_validate_certs: no
           apic_password: foo!bar
+
+    MinIO:
+      hosts:
+        s3.amazonaws.com: {}

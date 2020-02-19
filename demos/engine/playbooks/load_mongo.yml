@@ -1,0 +1,78 @@
+#!/usr/bin/ansible-playbook
+---
+#
+#      Copyright (c) 2020 World Wide Technology, LLC.
+#      All rights reserved.
+#
+#      author: Joel W. King, World Wide Technology
+#
+#      Loads a JSON file into a MongoDB
+#
+#      Sample Inventory file entry:
+#
+#        [mongodb]
+#        rocket.sandbox.wwtatc.local
+#        [mongodb:vars]
+#        port=27017
+#
+#      Sample passwords.yml
+#        mongodb:
+#          username: root
+#          password: ""
+#
+#      Usage: 
+#
+#        ./load_mongo.yml -e "hostname=rocket.sandbox.wwtatc.local database=ACI collection=foo filename=./files/input.json"
+#
+#      Input file example:
+#      {
+#      "message_gbl": {
+#      "room_name": "Super-NetOps",
+#      "teams": "https://outlook.office.com/webhook/0ebc95ca-9544354a"}
+#      }
+#
+#
+- name: load configuration data into a MongoDB database
+  connection: local
+  hosts:  mongodb 
+  gather_facts: false
+
+  vars:
+    # these default values would be overridden with extra vars specified with the -e switch
+    hostname: rocket.sandbox.wwtatc.local
+    database: F5 
+    collection: f5_gbl 
+    filename: inputfile
+      
+  tasks:
+  - name: Decrypt the password file
+    include_vars: "{{ playbook_dir }}/passwords.yml"
+
+  - name: Load data using module from the collection
+    joelwking.mongodb.mongodb_iq:
+      host: "{{ hostname }}"
+      username: "{{ mongodb.username }}"
+      password: "{{ mongodb.password }}"
+      port: "{{ port }}"
+      #
+      database:  "{{ database }}"
+      collection: "{{ collection }}"
+      document: "{{ lookup('file', filename) }}"
+  
+  - debug:
+      msg: "Document loaded under ObjectID: {{ _id }}"
+
+  - name: Retrieve a document from the database
+    joelwking.mongodb.mongodb_iq:
+      host: "{{ hostname }}"
+      username: "{{ mongodb.username }}"
+      password: "{{ mongodb.password }}"
+      port: "{{ port }}"
+      database:  "{{ database }}"
+      collection: "{{ collection }}"
+      query:  {"_id": "{{ _id }}" }
+
+  - name: Select fields in the document
+    debug:
+      msg: '{{ ansible_facts[collection]["service_level"] }}'
+
