@@ -1,0 +1,65 @@
+{
+  "imdata": {
+    "firewall": {
+      "group": "rtp_wan_edge",
+      "acl_name": "INBOUND"
+    },
+    "audit": {
+      "hostname": "rocket",
+      "database": "firewall_config",
+      "collection": "rtp_wan_edge"
+    },
+    "tags": [
+      "white",
+      "roan",
+      "liver"
+    ],
+    "ticket": {
+      "number": "CHG0030008",
+      "instance": "dev17569",
+      "table": "change_request"
+    },
+    "vips": [
+      {
+        "name": "vip.kit.example.net",
+        "state": "present",
+        "source": "0.0.0.0",
+        "wildcard_bits": "255.255.255.255",
+        "destination": "203.0.113.111",
+        "port": "443",
+        "protocol": "tcp",
+        "pool": "pool.kit.example.net",
+        "expiration": "2018-09-03T21:36:20Z",
+        "effective": "2018-07-03T21:36:20Z"
+      }
+    ],
+    "load_balancer": {
+      "group": "rtp_lb_edge"
+    },
+    "pools": [
+      {
+        "name": "pool.kit.example.net",
+        "state": "present",
+        "method": "round-robin",
+        "monitor": "http",
+        "partition": "Common",
+        "members": [
+          {
+            "name": "server2.example.net",
+            "state": "present",
+            "partition": "Common",
+            "port": "80"
+          }
+        ]
+      }
+    ],
+    "nodes": [
+      {
+        "name": "server2.example.net",
+        "state": "present",
+        "partition": "Common",
+        "address": "10.1.1.2"
+      }
+    ]
+  }
+}

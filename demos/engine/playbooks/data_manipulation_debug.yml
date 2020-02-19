@@ -1,0 +1,48 @@
+#!/usr/bin/ansible-playbook
+---
+#
+#      Copyright (c) 2020 World Wide Technology, LLC.
+#      All rights reserved.
+#
+#      author: joel.king@wwt.com GitHub/GitLab @joelwking
+#
+#      description: 
+#
+#        This playbook demonstrates referencing vars, vars files.
+#
+#      Reference: 
+#          https://www.shellhacks.com/ansible-debug-print-variable-list-all-variables-playbook/
+#          https://gryzli.info/2017/12/21/ansible-debug-print-variables/
+#
+#      usage:
+#
+#        ./data_manipulation_debug.yml -i inventory.yml -e 'facts=yes' -v
+#        ./data_manipulation_debug.yml -i inventory.yml -e 'desc="this is a test"' -v
+#
+#
+- name: Data Manipulation | Meetup | Ansible Durham 
+  hosts: sandboxapicdc.cisco.com
+  connection: local
+  gather_facts: '{{ facts | default("no") }}' 
+
+  vars:
+    foo:
+      name: bar
+      description: '{{ desc | default("This is a test") }}'
+
+  vars_files:
+    - '{{ playbook_dir }}/files/LTM_VIP.json'
+
+  tasks:
+    - name: Hostvars | run with or without gathering facts
+      debug:
+        var: hostvars[inventory_hostname] 
+
+    - name: Variable from vars_file specified
+      debug:
+        var: imdata 
+
+    - name: Variable defined in playbook
+      debug:
+        msg: '{{ foo.description }}' 
+            
