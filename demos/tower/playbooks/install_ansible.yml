@@ -1,0 +1,160 @@
+#!/usr/bin/ansible-playbook
+---
+#
+#      Copyright (c) 2020 World Wide Technology, LLC.
+#      All rights reserved.
+#
+#      author: joel.king@wwt.com GitHub/GitLab @joelwking
+#
+#      description: 
+#
+#        This playbook installs Ansible Engine and Tower, along with supporting utilities
+#
+#      usage:
+#
+#        ./install_ansible.yml -v -i inventory.yml -e 'target_instance=ec2-34-238-143-41.compute-1.amazonaws.com'
+#               --private-key=~/amazon_web_service/access_keys/customer_training/private.pem --user centos
+#
+#
+#       references:
+#          https://aws.amazon.com/blogs/apn/getting-started-with-ansible-and-dynamic-amazon-ec2-inventory-management/
+#          https://docs.ansible.com/ansible/latest/plugins/inventory.html
+
+- name: Setup CentOS Instance to run Ansible Tower
+  hosts: '{{ target_instance | default("localhost") }}'
+  gather_facts: no
+
+  vars:
+
+    #
+    # Specify via extra vars on command line or by using --extra-vars "@some_file.json"
+    # 
+    release: ansible-tower-setup-3.6.4-1                   # Release of Tower to install
+    tower_password: CHANGEME                               # Placeholder for the password - admin account of Ansible Tower
+
+    collections_path: /usr/share/ansible/collections       # Manually installed collections are stored at this path
+
+    add_collections:                                       # Provide a list of collections to install
+        - joelwking.mongodb
+
+    #
+    #   Typically you will not need to modify variables below this line
+    #
+    downloads: 
+      - url: 'https://releases.ansible.com/ansible-tower/setup/{{ release }}.tar.gz '
+        fn: '{{ release }}.tar.gz'
+    #   https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz
+
+    packages:
+      yum:
+          - epel-release                        # Required to download the latest Ansible and install pip
+          - python-pip                          # Pip not installed on CentOS by default
+          - ansible                             # Ansible Engine
+
+      pip:
+          - ansible-tower-cli
+
+    commands:
+      pre_install:  
+        - 'yum-config-manager --add-repo https://releases.ansible.com/ansible-tower/cli/ansible-tower-cli-el7.repo'
+      
+      verification:
+        - awx-cli --version
+        - ansible --version
+
+  tasks:
+    - name: Pre-install tasks
+      shell: "{{ item }}"
+      register: pre_install
+      ignore_errors: True
+      tags: pre_install
+      become: yes
+      loop: "{{ commands.pre_install }}"
+
+    - name: upgrade all packages
+      yum:
+        name: '*'
+        state: latest
+      become: yes
+
+    - name: Install the yum packages
+      yum:
+        name: "{{ item }}"
+        state: latest
+      become: yes
+      loop:  "{{ packages.yum }}"
+
+    - name: Install the pip packages
+      pip:
+        name: "{{ item }}"
+        state: latest
+      become: yes
+      loop: "{{ packages.pip }}"
+
+    - name: Post install check
+      shell: "{{ item }}"
+      register: verification
+      ignore_errors: True
+      tags: verification
+      become: no
+      loop: "{{ commands.verification }}"
+
+    #
+    #  Install Ansible Tower
+    #
+
+    - name: Get $HOME directory
+      shell: "echo $HOME"
+      register: home_dir
+
+    - set_fact:
+        home_dir: '{{ home_dir.stdout }}'
+
+    - name: Download files / to install on the server
+      get_url:
+        url: '{{ item.url }}'
+        dest: '{{ home_dir }}/{{ item.fn }}'
+      loop:  '{{ downloads }}'
+
+    - name: Extract the file `tar xvzf ansible-tower-setup-3.6.4-1.tar.gz`
+      unarchive:
+        remote_src: yes
+        src: '{{ item.fn }}'
+        dest: '{{ home_dir }}'
+      loop:  '{{ downloads }}'
+
+    - name: Replace the inventory file installed with our edited copy [provided passwords]
+      template:
+        src: '{{ playbook_dir }}/templates/single_node_inventory.ini.j2'
+        dest: '{{ home_dir }}/{{ release }}/inventory'
+
+    - name: Ensure "collections_paths = /usr/share/ansible/collections/" is in section "[defaults]" in specified file
+      ini_file:
+        path: /etc/ansible/ansible.cfg
+        section: defaults
+        option: collections_paths
+        value: '{{ collections_path }}'
+        backup: yes
+      become: yes
+
+    - name: Create a directory for installing collections if it does not exist
+      file:
+        path: '{{ collections_path }}'
+        state: directory
+        mode: '0755'
+      become: yes
+
+    - name: Install Collections e.g. 'ansible-galaxy collection install joelwking.mongodb -p PATH'
+      shell: 'ansible-galaxy collection install {{ item }} -p {{ collections_path }}'
+      become: yes
+      loop: '{{ add_collections }}'
+
+    - name: Install Ansible Tower by running setup
+      shell: './setup.sh .'
+      args:
+          chdir: '{{ home_dir }}/{{ release }}'
+      become: yes
+
+    #
+    #  TODO License Ansible Tower
+    #

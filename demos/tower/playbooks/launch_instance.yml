@@ -1,0 +1,62 @@
+#!/usr/bin/ansible-playbook
+---
+#
+#      Copyright (c) 2020 World Wide Technology, LLC.
+#      All rights reserved.
+#
+#      author: joel.king@wwt.com GitHub/GitLab @joelwking
+#
+#      description: 
+#
+#        This playbook creates an EC2 instance in AWS
+#
+#      usage:
+#
+#        ./launch_instance.yml -v -i ./inventory.yml
+#
+#
+- name: Setup EC2 Instance to run Ansible Tower
+  hosts:  EC2
+  connection: local
+  gather_facts: no
+
+  vars:
+    #
+    # Specify via extra vars on command line or by using --extra-vars "@some_file.json"
+    # 
+    number_of_instances: 1
+    customer: vlabs
+    aws:
+      region: 'us-east-1'
+      keypair: 'customer_training'
+      group: 'phantom'
+
+    #
+    #   Typically you will not need to modify variables below this line
+    #
+    recommended:
+      type: 't2.medium'
+      image: 'ami-0affd4508a5d2481b'
+      volume_size: 20
+
+  tasks:      
+    - name: Launching an EC2 Instance
+      ec2:
+          instance_type: '{{ recommended.type }}'
+          image: '{{ recommended.image }}'
+          region: '{{ aws.region }}'
+          keypair: '{{ aws.keypair }}'
+          count: '{{ number_of_instances }}'
+          group: '{{ aws.group }}'
+          wait: yes
+          volumes:
+              - device_name: /dev/sda1
+                volume_size: '{{ recommended.volume_size }}'
+                delete_on_termination: true
+          instance_tags:
+            customer: '{{ customer }}'
+      register: ec2
+
+    - debug:
+        msg: '{{ item.public_dns_name }} {{ item.key_name }} {{ item.public_ip }}' 
+      loop: '{{ ec2.instances }}'

@@ -1,0 +1,45 @@
+---
+all:
+
+  hosts:
+    ec2-34-238-143-41.compute-1.amazonaws.com: {}
+    ec2-3-89-39-123.compute-1.amazonaws.com: {}
+    
+    EC2:
+        # use `ansible-vault encrypt_string foo!bar`
+        # user/service_account_gsd
+        #
+        #  https://docs.ansible.com/ansible/latest/user_guide/intro_dynamic_inventory.html#inventory-script-example-aws-ec2
+        #  ... the simplest is to export two environment variables: ...
+        #  export AWS_ACCESS_KEY_ID='AK123'
+        #  export AWS_SECRET_ACCESS_KEY='abc123'
+        #
+        aws_access_key_id: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          30633864343836373838353439666339396337316365376437396533666161633063616131323931
+          3030653431623632646538643562386362313564386563660a316238366135313364353033326134
+          66623435313164346133396531656165316130333333623534623534336438663665643338363662
+          3237666534383465320a333066336165343163653738376365313730616638353330353430626364
+          34393263383031303633356662646465356339613161366663646237373763373733
+
+        aws_secret_access_key:  !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          62613134636561363035656236313962356435313436346362376662306163363937393563626561
+          3335663837633965343230396666646539623938333536300a336232616131313736653166646331
+          36366534613435653933343932373333633365613938383566336562633438376236383933626161
+          3035373639323530370a613632626161306663383331663532386531396330653034303265626433
+          66646264623662303232626462363539356234313836613361356337623931386466356536646431
+          6434363334346233373466613161383338306236636631626435
+
+  children:
+    APIC:
+      hosts:
+        #
+        # This APIC is in the DevNet Sandbox 
+        #
+        sandboxapicdc.cisco.com:
+          apic_hostname: sandboxapicdc.cisco.com
+          apic_username: admin
+          apic_use_proxy: no
+          apic_validate_certs: no
+          apic_password: foo!bar
