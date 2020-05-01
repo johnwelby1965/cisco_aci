@@ -12,6 +12,10 @@
 #
 #      usage:
 #
+#        Increase the SSH timeout value prior to running this playbook
+#
+#        export ANSIBLE_TIMEOUT=600
+#
 #        ./install_ansible.yml -v -i inventory.yml -e 'target_instance=ec2-34-238-143-41.compute-1.amazonaws.com'
 #               --private-key=~/amazon_web_service/access_keys/customer_training/private.pem --user centos
 #
@@ -154,7 +158,8 @@
       args:
           chdir: '{{ home_dir }}/{{ release }}'
       become: yes
-
+      async: 1200                                          # long running job, 20 minutes
+      poll: 10                                             # poll every 10 seconds
     #
     #  TODO License Ansible Tower
     #
