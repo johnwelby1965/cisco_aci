@@ -1,0 +1,166 @@
+#!/usr/bin/ansible-playbook
+---
+#      ./install_engine.yml
+#
+#
+#      Copyright (c) 2020 World Wide Technology, LLC
+#      All rights reserved.
+#
+#      Author: joel.king@wwt.com (@joelwking)
+#
+#      Usage: ./install_engine.yml -v  --private-key=~/.ssh/devnet_sdk_demo.pem --user ubuntu
+#
+#      Notes:
+#
+#      Check your current configuration:
+#
+#      administrator@ansible-tower:~$ ansible-config dump --only-changed
+#      DEFAULT_MODULE_PATH(/etc/ansible/ansible.cfg) = [u'/usr/share/ansible']
+#
+#      Useful commands for configuring ansible (in your .profile) 
+#
+#        export ANSIBLE_CONFIG="$HOME/ansible/playbooks/ansible.cfg"
+#        export ANSIBLE_VAULT_PASSWORD_FILE="$HOME/ansible/playbooks/vault_pass.secret"
+#        export ANSIBLE_PARAMIKO_HOST_KEY_AUTO_ADD=True
+#        export GIT_SSL_NO_VERIFY=1
+#        export PYTHONPATH="/usr/share/ansible"
+#
+#      inventory.yml
+#
+#      all:
+#        hosts:
+#          ec2-54-80-193-109.compute-1.amazonaws.com:
+#             ansible_python_interpreter: /usr/bin/python3.6  
+#               or 
+#             ansible_python_interpreter: /usr/bin/python3
+#
+#      Note, if running Ubuntu 16.04.6 LTS you will need to install Python 3.6 if you want the Minio package
+#      to install, as it requires 3.6.  
+#
+#
+- name: Installs packages for a development (and training) environment
+  hosts: ec2-54-80-193-109.compute-1.amazonaws.com
+
+  vars:
+    packages:      
+      repository:
+          - "ppa:ansible/ansible"
+          - "ppa:deadsnakes/ppa"            # Install 3.6 on Ubuntu 16.04.6 LTS
+
+      apt:
+          - python3-pip
+          - python3.6
+          - dos2unix                        # Helper for Windows 10 laptop
+          - python-pip
+          - python-dev
+          - git
+          - traceroute
+          - nmap
+          - software-properties-common
+          - build-essential
+          - libssl-dev
+          - libffi-dev
+          - python-mysql.connector          # MYSQL container
+          - default-jdk                     # NSO and Tail-F
+          - ant                             # NSO and Tail-F
+          - virtualbox-guest-x11            # Virtualbox Guest Editions mounting host files
+          - tree                            # visualize directory structure
+          - unzip                           # unzip utility
+          - libsnappy-dev                   # install Snappy C library for python-snappy
+          - mc                              # Minio config utility
+          - docker-compose
+          - ansible
+
+      pip:
+          - pip                            # pip install upgrade pip
+          - f5-sdk                         #  SDKs for F5
+          - pyvmomi
+          - pysphere
+          - cryptography
+          - objectpath
+          - requests
+          - urllib3
+          - requests-toolbelt
+          - flake8                         # Linter
+          - ncclient
+          - dnspython
+          - whois                          # VPN analysis
+          - ipwhois                        # VPN analysis
+          - tetpyclient                    # Tetration
+          - xlsxwriter                     # Tetration (Bruce)
+          - pandas                         # Tetration (Bruce)
+          - xlrd                           # pandas Install xlrd >= 0.9.0 for Excel support
+          - pymongo                        # MongoDB 
+          - netaddr                        # manulipulate network addresses
+          - infoblox-client                # Needed for Ansible 2.5 infoblox support
+          - pyopenssl                      # ACI modules when using certificates for authentication
+          - pysnow                         # Serivce Now
+          - confluent-kafka                # Kafka for Tetration (Confluent)
+          - passlib                        # used to generate encrypted passwords for Ansible user module
+          - kafka-python                   # Kafka for Tetration
+          - python-snappy                  # KafkaConsumer Snappy decompression (requires libsnappy-dev)
+          - pydevd                         # Remote debugger for PyCharm
+          - requests_ntlm                  # Requests add-on for sharepoint API
+          - ansible-lint                   # Ansible Lint
+          # - minio                          # minio.io Amazon S3 compatable object storage REQUIRES PYTHON 3.6
+          - openpyxl                       # used by https://github.com/mamullen13316/ansible_xls_to_facts/blob/master/xls_to_facts.py
+          - pyqrcode                       # generate qr codess
+          - pypng                          # generate png for qr codes
+          - python-pptx                    # manipulation of PowerPoint files with Python
+          - rake-nltk                      # Python implementation of the Rapid Automatic Keyword Extraction algorithm using NLTK.
+          - fuzzywuzzy                     # Fuzzy String Matching in Python
+          - python-Levenshtein             # optimizes fuzzywuzzy
+          - PyPDF2                         # PDF toolkit
+          - boto3                          # AWS S3 SDK (installs botocore)
+          - boto                           # AWS boto for ec2 module
+
+
+  tasks:
+    - name: Determine OS
+      debug:
+         msg:  "{{ ansible_pkg_mgr }}"           # 'apt' or 'yum'
+
+    - name:  Ubuntu | Debian based systems
+      block:
+        - name: Update all packages to the latest version
+          apt:
+            upgrade: dist
+          become: true
+
+        - name: apt add repository
+          shell: "apt-add-repository --yes --update {{ item }}"
+          become: true
+          loop: "{{ packages.repository }}"
+
+        - name: Install the apt packages
+          apt:
+            name: "{{ item }}"
+            state: latest
+          become: true
+          loop: "{{ packages.apt }}"
+          #
+          #  common python packages
+          #
+        - name: Install the python packages
+          pip:
+            name: "{{ item }}"
+            state: latest
+            # use_mirrors: no
+          become: true
+          loop: "{{ packages.pip }}"
+          #
+          #  apt
+          #
+        - name: Upgrade all packages to the latest version
+          apt:
+          #  name: "*"
+            state: latest
+          become: true 
+
+        - name: Update all packages to the latest version
+          apt:
+            upgrade: dist
+          become: true
+          
+      when: ansible_pkg_mgr == 'apt'
+
