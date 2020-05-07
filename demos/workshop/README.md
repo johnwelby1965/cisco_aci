@@ -26,7 +26,7 @@ In addition to a computer running the macOS, Linux, and Windows 10 operating sys
 ### Visual Studio Code
 VS Code is a free code editor, which runs on the aforementioned operating systems. Download and install it at https://code.visualstudio.com/download. 
 
-While there are a number of suitable editors available for free or for a nonimal license fee, this training makes use fo the VS Code [Remote Development using SSH](https://code.visualstudio.com/docs/remote/ssh). The Visual Studio Code Remote - SSH extension allows you to open a remote folder on any remote machine, (virtual machine, or container) and terminal window with a running SSH server. 
+While there are a number of suitable editors available for free or for a nominal license fee, this training makes use of the VS Code [Remote Development using SSH](https://code.visualstudio.com/docs/remote/ssh). The Visual Studio Code Remote - SSH extension allows you to open a remote folder on any remote machine, (virtual machine, or container) and terminal window with a running SSH server. 
 
 Install the [Visual Studio Code Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack).
 
