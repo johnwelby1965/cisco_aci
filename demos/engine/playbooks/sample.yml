@@ -10,7 +10,7 @@
 #      
 #
 #
-- name: Demo for Ansible Automation of Cisco ACI by the Armed & Gorgeous One!
+- name: Ansible Automation of ACI by the Brisketless One :^(
   hosts:  '{{ apic_hostname }}'
   connection: local
   gather_facts: no
