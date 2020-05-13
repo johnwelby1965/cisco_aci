@@ -1,9 +1,0 @@
----
-#
-# Cisco ACI role
-#
-  - src: https://galaxy.ansible.com/cisco/aci
-    scm: git
-    version: master
-
-  
