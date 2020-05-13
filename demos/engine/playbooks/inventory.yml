@@ -7,12 +7,12 @@ all:
         #
         #  This APIC is within the WWT Advanced Technology Center
         #
-        aci-demo.sandbox.wwtatc.local:
-          apic_hostname: aci-demo.sandbox.wwtatc.local
-          apic_username: admin
-          apic_use_proxy: no
-          apic_validate_certs: no
-          apic_password: foo!bar
+        # aci-demo.sandbox.wwtatc.local:
+         #  apic_hostname: aci-demo.sandbox.wwtatc.local
+         #  apic_username: admin
+         #  apic_use_proxy: no
+         #  apic_validate_certs: no
+         #  apic_password: foo!bar
         #
         # This APIC is in the DevNet Sandbox 
         #
