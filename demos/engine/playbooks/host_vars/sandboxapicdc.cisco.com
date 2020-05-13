@@ -4,11 +4,11 @@
 #
     fvTenant:
       - name: INTERNAL
-        descr: '@johnwelby'
+        descr: 'Create ACI Tenant@johnwelby'
         state: present
 
       - name: EXTERNAL
-        descr: '@johnwelby'
+        descr: 'Create ACI Tenant@johnwelby'
         state: present
 
     fvCtx:
