@@ -4,16 +4,16 @@
 #
     fvTenant:
       - name: INTERNAL
-        descr: '@joelwking'
+        descr: '@johnwelby'
         state: present
 
       - name: EXTERNAL
-        descr: '@joelwking'
+        descr: '@johnwelby'
         state: present
 
     fvCtx:
       - name: GREEN
-        descr: vrf GREEN @joelwking
+        descr: vrf GREEN @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction
         state: present
@@ -21,7 +21,7 @@
           name: INTERNAL
 
       - name: RED
-        descr: vrf RED @joelwking
+        descr: vrf RED @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction      
         state: present
@@ -29,7 +29,7 @@
           name: EXTERNAL
 
       - name: BLACK
-        descr: vrf BLACK @joelwking
+        descr: vrf BLACK @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction      
         state: absent
@@ -41,6 +41,6 @@
     lldpIfP:
       - adminRxSt: on
         adminTxSt: on
-        descr: 'LLDP Interface Policy @joelwking'
+        descr: 'LLDP Interface Policy @johnwelby'
         name: Link_Layer_Discovery_Protocol_ON
         state: present
