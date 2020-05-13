@@ -20,17 +20,17 @@
   connection: local
   gather_facts: no
 
-  vars_files:
-    - '{{ playbook_dir }}/files/passwords.yml'
+  #vars_files:
+  #  - '{{ playbook_dir }}/files/passwords.yml'
 
-  vars:
+  #vars:
     # We prepare an aci_login anchor for convenience
-    aci_login: &aci_login
-      hostname: '{{ apic_hostname }}'
-      username: '{{ apic_username }}'
-      password: '{{ apic_password }}'
-      use_proxy: '{{ apic_use_proxy }}'
-      validate_certs: '{{ apic_validate_certs }}'
+  # aci_login: &aci_login
+  #    hostname: '{{ apic_hostname }}'
+  #    username: '{{ apic_username }}'
+  #    password: '{{ apic_password }}'
+  #    use_proxy: '{{ apic_use_proxy }}'
+  #    validate_certs: '{{ apic_validate_certs }}'
 
   tasks:
     - name: Tenant Policy
