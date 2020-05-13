@@ -1,21 +1,16 @@
 #!/usr/bin/ansible-playbook
 ---
 #
-#      Copyright (c) 2019 World Wide Technology, LLC.
-#      All rights reserved.
+#      
 #
-#      author: joel.king@wwt.com GitHub/GitLab @joelwking
+#      
 #
-#      description: 
+#  This playbook manages Tenants, VRFs and fabric policies to demonstrate the Ansible ACI content collection.
 #
-#        This playbook manages Tenants, VRFs and fabric policies to demonstrate the Ansible ACI contenct collection.
-#
-#      usage:
-#
-#        ./sample.yml -v -i inventory.yml --ask-vault -e 'apic_hostname=sandboxapicdc.cisco.com apic_password=foo!bar'
+#      
 #
 #
-- name: Demo for the Cisco Data Center Community of Interest
+- name: Demo for Ansible Automation of Cisco ACI
   hosts:  '{{ apic_hostname }}'
   connection: local
   gather_facts: no
