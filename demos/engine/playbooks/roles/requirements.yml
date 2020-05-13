@@ -1,9 +1,6 @@
 ---
-# You can specify multiple repos, just add items to the list
-# See http://docs.ansible.com/ansible/latest/galaxy.html#installing-multiple-roles-from-a-file
-# Will define customer package post deployment on external private WWT github
 #
-# Utility roles
+# Cisco ACI role
 #
   - src: https://galaxy.ansible.com/cisco/aci
     scm: git
