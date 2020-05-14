@@ -10,7 +10,7 @@
 #      
 #
 #
-- name: Demo of Ansible Automation for SSS @ DHS
+- name: Demo of Ansible Automation of Cisco ACI - creates Tenants, VRFs and LLDP Fabric Policies
   hosts:  '{{ apic_hostname }}'
   connection: local
   gather_facts: no
