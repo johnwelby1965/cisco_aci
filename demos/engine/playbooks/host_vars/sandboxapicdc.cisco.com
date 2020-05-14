@@ -3,38 +3,38 @@
 #  Tenant Policies
 #
     fvTenant:
-      - name: INTERNAL
+      - name: TSMOE
         descr: 'Create ACI Tenant@johnwelby'
         state: present
 
-      - name: EXTERNAL
+      - name: CLAN
         descr: 'Create ACI Tenant@johnwelby'
         state: present
 
     fvCtx:
-      - name: GREEN
-        descr: vrf GREEN @johnwelby
+      - name: HIGH
+        descr: vrf HIGH side @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction
         state: present
         fvTenant: 
-          name: INTERNAL
+          name: TSMOE
 
-      - name: RED
-        descr: vrf RED @johnwelby
+      - name: LOW
+        descr: vrf LOW side @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction      
         state: present
         fvTenant: 
-          name: EXTERNAL
+          name: CLAN
 
-      - name: BLACK
-        descr: vrf BLACK @johnwelby
+      - name: UNCLASS
+        descr: vrf UNCLASS @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction      
         state: absent
         fvTenant: 
-          name: EXTERNAL          
+          name: CLAN         
 #
 # Fabric Access Policies
 #
