@@ -4,11 +4,11 @@
 #
     fvTenant:
       - name: TSMOE
-        descr: 'Create ACI Tenant@johnwelby'
+        descr: 'Ansible created@johnwelby'
         state: present
 
       - name: CLAN
-        descr: 'Create ACI Tenant@johnwelby'
+        descr: 'Ansible created@johnwelby'
         state: present
 
     fvCtx:
