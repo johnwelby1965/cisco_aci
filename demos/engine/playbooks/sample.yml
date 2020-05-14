@@ -10,7 +10,7 @@
 #      
 #
 #
-- name: Ansible Automation of ACI by the Brisketless One :^(
+- name: Demo of Ansible Automation for SSS @ DHS
   hosts:  '{{ apic_hostname }}'
   connection: local
   gather_facts: no
