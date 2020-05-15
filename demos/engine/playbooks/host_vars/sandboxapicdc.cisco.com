@@ -4,16 +4,16 @@
 #
     fvTenant:
       - name: TSMOE
-        descr: 'Ansible created@johnwelby'
+        descr: 'Ansible@johnwelby'
         state: present
 
       - name: CLAN
-        descr: 'Ansible created@johnwelby'
+        descr: 'Ansible@johnwelby'
         state: present
 
     fvCtx:
       - name: HIGH
-        descr: vrf HIGH side @johnwelby
+        descr: vrf HIGH@johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction
         state: present
@@ -21,7 +21,7 @@
           name: TSMOE
 
       - name: LOW
-        descr: vrf LOW side @johnwelby
+        descr: vrf LOW@johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction      
         state: present
@@ -29,7 +29,7 @@
           name: CLAN
 
       - name: UNCLASS
-        descr: vrf UNCLASS @johnwelby
+        descr: vrf UNCLASS@johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction      
         state: absent
@@ -41,6 +41,6 @@
     lldpIfP:
       - adminRxSt: on
         adminTxSt: on
-        descr: 'LLDP Interface Policy @johnwelby'
+        descr: 'LLDP Interface Policy@johnwelby'
         name: Link_Layer_Discovery_Protocol_ON
         state: present
