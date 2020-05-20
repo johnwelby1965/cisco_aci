@@ -1,11 +1,7 @@
-# cisco_dc_community_of_interest
+# Red Hat Ansible Automation of Cisco ACI
 
-Collateral for the Cisco Data Center (DC) Community of Interest webinar - 13 December 2019
 
 ## General Resources
-* WWT Digital Platform: https://www.wwt.com
-* GitLab repository of demonstration: https://gitlab.com/joelwking/cisco_dc_community_of_interest
-* WWT Saves Time and Money using Ansible Automation: https://youtu.be/3vuPRoyOIFo
 * Ansible Meetups: https://www.meetup.com/topics/ansible/
 * Cisco DevNet Code Exchange: https://developer.cisco.com/codeexchange
 * Red Hat Ansible Automation: https://www.ansible.com/
@@ -14,7 +10,6 @@ Collateral for the Cisco Data Center (DC) Community of Interest webinar - 13 Dec
 ## Demo Resources
 * Instructions: https://gitlab.com/joelwking/cisco_dc_community_of_interest/blob/master/demos/engine/README.md
 * Demo video on Vimeo (without audio ): https://vimeo.com/383756669
-* WWT RedHat Ansible Cisco ACI sandbox: https://www.wwt.com/lab/aci-ansible-sandbox
 * DevNet: https://developer.cisco.com
 * DevNet ACI Sandbox: https://developer.cisco.com/site/aci/
 * Red Hat Product Demo System: https://rhpds.redhat.com
@@ -35,7 +30,7 @@ Collateral for the Cisco Data Center (DC) Community of Interest webinar - 13 Dec
 * ACI Guide: https://docs.ansible.com/ansible/latest/scenario_guides/guide_aci.html
 
 ## Directory Structure
-The `demos` directory is divided into two sections, `engine` and `tower`.  For the webinar on the 13th December, we will focus on the `engine` section. The goal of the demo is that every participant will have a basic understanding on how to execute the sample playbook from their laptop to configure the ACI demo fabric in the DevNet Sandbox.
+The `demos` directory is divided into two sections, `engine` and `tower`.  For this demo was originally created for the `engine` section. The goal of the demo is that every participant will have a basic understanding on how to execute the sample playbook from their laptop, using Ansible Engine (i.e. command line)  to configure the ACI demo fabric in the DevNet Sandbox.
 
 ```bash
 
@@ -50,7 +45,7 @@ The `demos` directory is divided into two sections, `engine` and `tower`.  For t
 ├── NOTICE
 └── README.md
 ```
-The `tower` section includes a sample Vagrantfile which builds a VM and installs **awx** - the official command-line client for AWX and Red Hat Ansible Tower. Following the webinar on the 13th December, I will update the `README.md` file to include instructions on how to use **awx** to configure an Ansible Tower instance running in the WWT Advanced Technology Center on-demand lab environment, so you can execute the same playbook used in the demo video using Ansible Tower. Stay tuned. 
+The `tower` section includes a sample Vagrantfile which builds a VM and installs **awx** - the official command-line client for AWX and Red Hat Ansible Tower.  
 
 ## Author
 joel.king@wwt.com GitHub/GitLab: @joelwking
