@@ -3,38 +3,38 @@
 #  Tenant Policies
 #
     fvTenant:
-      - name: TSMOE
+      - name: DEV
         descr: 'Ansible@johnwelby'
         state: present
 
-      - name: CLAN
+      - name: DEPLOYMENT
         descr: 'Ansible@johnwelby'
         state: present
 
     fvCtx:
-      - name: HIGH
-        descr: vrf HIGH@johnwelby
+      - name: APP
+        descr: vrf @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction
         state: present
         fvTenant: 
-          name: TSMOE
+          name: DEV
 
-      - name: LOW
-        descr: vrf LOW@johnwelby
+      - name: LAN
+        descr: vrf @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction      
         state: present
         fvTenant: 
-          name: CLAN
+          name: DEPLOYMENT
 
-      - name: UNCLASS
-        descr: vrf UNCLASS@johnwelby
+      - name: WAN
+        descr: vrf @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction      
         state: absent
         fvTenant: 
-          name: CLAN         
+          name: DEPLOYMENT        
 #
 # Fabric Access Policies
 #
