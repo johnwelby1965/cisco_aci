@@ -48,4 +48,5 @@ The `demos` directory is divided into two sections, `engine` and `tower`.  For t
 The `tower` section includes a sample Vagrantfile which builds a VM and installs **awx** - the official command-line client for AWX and Red Hat Ansible Tower.  
 
 ## Author
-joel.king@wwt.com GitHub/GitLab: @joelwking
+John Welby
+This repo was cloned from Joel King's GitHub/GitLab repo: @joelwking
