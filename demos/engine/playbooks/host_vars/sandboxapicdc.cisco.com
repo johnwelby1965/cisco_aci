@@ -20,7 +20,7 @@
         fvTenant: 
           name: DEV
 
-      - name: LAN
+      - name: ACCT
         descr: vrf @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction      
@@ -28,10 +28,10 @@
         fvTenant: 
           name: DEPLOYMENT
 
-      - name: WAN
+      - name: DMZ
         descr: vrf @johnwelby
         pcEnfPref: enforced                                    # policy control preference
-        pcEnfDir: egress                                       # policy control direction      
+        pcEnfDir: ingress                                       # policy control direction      
         state: absent
         fvTenant: 
           name: DEPLOYMENT        
