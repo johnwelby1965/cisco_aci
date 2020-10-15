@@ -10,7 +10,7 @@
 #      
 #
 #
-- name: Thompson's Pod Demo of Ansible Automation of Cisco ACI - creates Tenants, VRFs and LLDP Fabric Policies
+- name: A fantastic demo of Ansible automation of Cisco ACI - creates Tenants, VRFs and LLDP Fabric Policies
   hosts:  '{{ apic_hostname }}'
   connection: local
   gather_facts: no
