@@ -4,16 +4,16 @@
 #
     fvTenant:
       - name: RedHat
-        descr: 'Ansible@johnwelby'
+        descr: 'Ansible created VRF@johnwelby'
         state: present
 
       - name: Cisco_1
-        descr: 'Ansible@johnwelby'
+        descr: 'Ansible created VRF@johnwelby'
         state: present
 
     fvCtx:
       - name: APP1
-        descr: vrf created by Red Hat Ansible
+        descr: 'vrf created by Red Hat Ansible'
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction
         state: present
@@ -21,20 +21,14 @@
           name: RedHat
 
       - name: ACCT1
-        descr: vrf created by Red Hat Ansible
+        descr: 'vrf created by Red Hat Ansible'
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction      
         state: present
         fvTenant: 
           name: Cisco_1
 
-      - name: DMZ
-        descr: vrf @johnwelby
-        pcEnfPref: enforced                                    # policy control preference
-        pcEnfDir: ingress                                       # policy control direction      
-        state: absent
-        fvTenant: 
-          name: DEPLOYMENT        
+           
 #
 # Fabric Access Policies
 #
