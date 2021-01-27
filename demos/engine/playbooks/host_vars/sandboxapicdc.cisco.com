@@ -13,7 +13,7 @@
 
     fvCtx:
       - name: APP1
-        descr: vrf @johnwelby
+        descr: vrf created by Red Hat Ansible
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction
         state: present
@@ -21,7 +21,7 @@
           name: RedHat
 
       - name: ACCT1
-        descr: vrf @johnwelby
+        descr: vrf created by Red Hat Ansible
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction      
         state: present
