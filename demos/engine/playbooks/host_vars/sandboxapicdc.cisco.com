@@ -3,30 +3,30 @@
 #  Tenant Policies
 #
     fvTenant:
-      - name: DEV
+      - name: RedHat
         descr: 'Ansible@johnwelby'
         state: present
 
-      - name: DEPLOYMENT
+      - name: Cisco_1
         descr: 'Ansible@johnwelby'
         state: present
 
     fvCtx:
-      - name: APP
+      - name: APP1
         descr: vrf @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction
         state: present
         fvTenant: 
-          name: DEV
+          name: RedHat
 
-      - name: ACCT
+      - name: ACCT1
         descr: vrf @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction      
         state: present
         fvTenant: 
-          name: DEPLOYMENT
+          name: Cisco_1
 
       - name: DMZ
         descr: vrf @johnwelby
