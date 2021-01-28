@@ -3,38 +3,46 @@
 #  Tenant Policies
 #
     fvTenant:
-      - name: RedHat
-        descr: 'Ansible created VRF@johnwelby'
+      - name: INTERNAL
+        descr: '@johnwelby'
         state: present
 
-      - name: Cisco_1
-        descr: 'Ansible created VRF@johnwelby'
+      - name: EXTERNAL
+        descr: '@johnwelby'
         state: present
 
     fvCtx:
-      - name: APP1
-        descr: 'vrf created by Red Hat Ansible'
+      - name: GREEN
+        descr: vrf GREEN @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction
         state: present
         fvTenant: 
-          name: RedHat
+          name: INTERNAL
 
-      - name: ACCT1
-        descr: 'vrf created by Red Hat Ansible'
+      - name: RED
+        descr: vrf RED @johnwelby
         pcEnfPref: enforced                                    # policy control preference
         pcEnfDir: egress                                       # policy control direction      
         state: present
         fvTenant: 
-          name: Cisco_1
+          name: EXTERNAL
 
-           
-#
+      - name: BLACK
+        descr: vrf BLACK @johnwelby
+        pcEnfPref: enforced                                    # policy control preference
+        pcEnfDir: egress                                       # policy control direction      
+        state: absent
+        fvTenant: 
+          name: EXTERNAL          
+
 # Fabric Access Policies
 #
     lldpIfP:
       - adminRxSt: on
         adminTxSt: on
-        descr: 'LLDP Interface Policy@johnwelby'
+        descr: 'LLDP Interface Policy @johnwelby'
         name: Link_Layer_Discovery_Protocol_ON
         state: present
+
+
