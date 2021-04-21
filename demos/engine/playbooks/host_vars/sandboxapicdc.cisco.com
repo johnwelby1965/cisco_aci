@@ -4,7 +4,7 @@
 #
     fvTenant:
       - name: INTERNAL
-        descr: '@johnwelby'
+        descr: 'Red Hat Cisco Alliance@johnwelby'
         state: present
 
       - name: EXTERNAL
