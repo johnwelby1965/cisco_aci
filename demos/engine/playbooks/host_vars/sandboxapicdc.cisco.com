@@ -8,7 +8,7 @@
         state: present
 
       - name: EXTERNAL
-        descr: '@johnwelby'
+        descr: 'Red Hat Cisco Alliance@johnwelby'
         state: present
 
     fvCtx:
