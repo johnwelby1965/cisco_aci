@@ -1,4 +1,4 @@
-# Red Hat Ansible Automation of Cisco ACI
+# Data Center Modernization Using Cisco ACI and Red Hat Ansible Automation Platform
 
 
 ## General Resources
@@ -8,7 +8,7 @@
 * Ansible Galaxy: https://galaxy.ansible.com/
 
 ## Demo Resources
-* Instructions: https://gitlab.com/joelwking/cisco_dc_community_of_interest/blob/master/demos/engine/README.md
+* Instructions: https://github.com/johnwelby1965/cisco_aci/
 * Demo video on Vimeo (without audio ): https://vimeo.com/383756669
 * DevNet: https://developer.cisco.com
 * DevNet ACI Sandbox: https://developer.cisco.com/site/aci/
@@ -49,4 +49,4 @@ The `tower` section includes a sample Vagrantfile which builds a VM and installs
 
 ## Author
 
-This repo was cloned from Joel King's GitHub/GitLab repo: @joelwking
+
