@@ -9,7 +9,7 @@
 
 ## Demo Resources
 * Instructions: https://github.com/johnwelby1965/cisco_aci/
-* Demo video on Vimeo (without audio ): https://vimeo.com/383756669
+* Demo video on YouTube: https://youtu.be/JVUe3KwqZMQ
 * DevNet: https://developer.cisco.com
 * DevNet ACI Sandbox: https://developer.cisco.com/site/aci/
 * Red Hat Product Demo System: https://rhpds.redhat.com
