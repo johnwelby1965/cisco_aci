@@ -21,7 +21,7 @@ all:
           apic_username: admin
           apic_use_proxy: no
           apic_validate_certs: no
-          apic_password: ciscopsdt
+          apic_password: !v3G@!4@Y
 
     MinIO:
       hosts:
